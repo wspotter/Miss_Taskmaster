@@ -25,6 +25,10 @@
       {
         "command": "missTaskmaster.initProject",
         "title": "Initialize Miss_TaskMaster Project"
+      },
+      {
+        "command": "missTaskmaster.runOrchestration",
+        "title": "Run Orchestration"
       }
     ]
   }
