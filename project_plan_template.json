@@ -1,0 +1,36 @@
+{
+  "project_name": "Miss_TaskMaster",
+  "description": "A multi-agent system for managing software development projects",
+  "tasks": [
+    {
+      "id": "GK1.1",
+      "description": "Initialize project repository",
+      "status": "pending",
+      "phase": "Setup"
+    },
+    {
+      "id": "GK1.2",
+      "description": "Set up Python environment",
+      "status": "pending",
+      "phase": "Setup"
+    },
+    {
+      "id": "CA1.1",
+      "description": "Implement logging configuration",
+      "status": "pending",
+      "phase": "Core"
+    },
+    {
+      "id": "CA1.2",
+      "description": "Implement session manager",
+      "status": "pending",
+      "phase": "Core"
+    },
+    {
+      "id": "GK2.1",
+      "description": "Run orchestration loop",
+      "status": "pending",
+      "phase": "Execution"
+    }
+  ]
+}
