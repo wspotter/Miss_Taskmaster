@@ -1,0 +1,21 @@
+
+# Python
+__pycache__/
+*.pyc
+*.pyd
+*.pyo
+.Python/
+build/
+dist/
+*.egg-info/
+.env
+venv/
+
+# VSCode
+.vscode/
+
+# Data/Logs
+*.log
+*.db
+session_state.json
+work_logs/
