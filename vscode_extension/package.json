@@ -29,6 +29,10 @@
       {
         "command": "missTaskmaster.runOrchestration",
         "title": "Run Orchestration"
+      },
+      {
+        "command": "missTaskmaster.showProjectPlan",
+        "title": "Show Project Plan"
       }
     ]
   }
