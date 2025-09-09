@@ -19,10 +19,56 @@ export function activate(context: vscode.ExtensionContext) {
         ProjectPlanPanel.createOrShow(context.extensionUri);
     });
 
+    // Create and register task status tree view
+    const taskStatusProvider = new TaskStatusProvider();
+    vscode.window.registerTreeDataProvider('taskStatus', taskStatusProvider);
+
     context.subscriptions.push(initProjectDisposable, runOrchestrationDisposable, showProjectPlanDisposable);
 }
 
 export function deactivate() {}
+
+class TaskStatusProvider implements vscode.TreeDataProvider<TaskItem> {
+    getTreeItem(element: TaskItem): vscode.TreeItem {
+        return element;
+    }
+
+    getChildren(element?: TaskItem): Thenable<TaskItem[]> {
+        if (!element) {
+            // Root level - return main categories
+            return Promise.resolve([
+                new TaskItem('Current Task', 'The task currently being executed', vscode.TreeItemCollapsibleState.None),
+                new TaskItem('Pending Tasks', 'Tasks waiting to be executed', vscode.TreeItemCollapsibleState.Collapsed),
+                new TaskItem('Completed Tasks', 'Tasks that have been completed', vscode.TreeItemCollapsibleState.Collapsed)
+            ]);
+        } else {
+            // TODO: Fetch actual task data from MCP server
+            if (element.label === 'Pending Tasks') {
+                return Promise.resolve([
+                    new TaskItem('GK1.1', 'Gatekeeper task 1.1', vscode.TreeItemCollapsibleState.None),
+                    new TaskItem('CA1.1', 'Coding agent task 1.1', vscode.TreeItemCollapsibleState.None)
+                ]);
+            } else if (element.label === 'Completed Tasks') {
+                return Promise.resolve([
+                    new TaskItem('GK1.0', 'Completed gatekeeper task', vscode.TreeItemCollapsibleState.None)
+                ]);
+            }
+            return Promise.resolve([]);
+        }
+    }
+}
+
+class TaskItem extends vscode.TreeItem {
+    constructor(
+        public readonly label: string,
+        public readonly tooltip: string,
+        public readonly collapsibleState: vscode.TreeItemCollapsibleState
+    ) {
+        super(label, collapsibleState);
+        this.tooltip = tooltip;
+        this.description = '';
+    }
+}
 
 class ProjectPlanPanel {
     public static currentPanel: ProjectPlanPanel | undefined;
