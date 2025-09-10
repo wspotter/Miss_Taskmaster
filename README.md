@@ -297,7 +297,7 @@ docker-compose build --no-cache
 
 ## 📄 License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+Miss_TaskMaster is provided under a proprietary license that allows free use for personal and non-commercial purposes only. See the [LICENSE](LICENSE) file for details.
 
 ## 🙏 Acknowledgments
 
