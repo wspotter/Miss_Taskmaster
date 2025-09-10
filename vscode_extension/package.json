@@ -1,22 +1,42 @@
 {
-  "name": "vscode_extension",
-  "version": "1.0.0",
-  "main": "index.js",
+  "name": "miss-taskmaster",
+  "displayName": "Miss TaskMaster",
+  "description": "A multi-agent system for managing complex software development projects",
+  "version": "0.0.1",
+  "publisher": "supermanus",
+  "main": "./out/extension.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src --ext ts",
+    "test": "node ./out/test/runTest.js",
+    "package": "vsce package"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": "",
-  "dependencies": {
-    "@types/node": "^24.3.1",
-    "@types/vscode": "^1.103.0",
-    "typescript": "^5.9.2"
+  "keywords": [
+    "ai",
+    "agents",
+    "project-management",
+    "llm",
+    "automation"
+  ],
+  "author": "SuperManUS",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/supermanus/miss-taskmaster.git"
   },
+  "bugs": {
+    "url": "https://github.com/supermanus/miss-taskmaster/issues"
+  },
+  "homepage": "https://github.com/supermanus/miss-taskmaster#readme",
   "engines": {
     "vscode": "^1.74.0"
   },
+  "categories": [
+    "Other"
+  ],
   "activationEvents": [
     "onCommand:missTaskmaster.initProject"
   ],
@@ -45,5 +65,18 @@
         }
       ]
     }
+  },
+  "dependencies": {
+    "axios": "^1.6.0"
+  },
+  "devDependencies": {
+    "@types/node": "^24.3.1",
+    "@types/vscode": "^1.103.0",
+    "@typescript-eslint/eslint-plugin": "^6.4.0",
+    "@typescript-eslint/parser": "^6.4.0",
+    "@vscode/test-electron": "^2.3.4",
+    "@vscode/vsce": "^2.19.0",
+    "eslint": "^8.47.0",
+    "typescript": "^5.9.2"
   }
 }
