@@ -1,0 +1,27 @@
+# Ignore built output
+out/
+
+# Ignore node modules
+node_modules/
+
+# Ignore git
+.git
+
+# Ignore VSCode settings
+.vscode/
+.settings/
+
+# Ignore build artifacts
+*.vsix
+*.tgz
+yarn-error.log
+
+# Ignore TypeScript compiler cache
+tsconfig.tsbuildinfo
+
+# Ignore logs
+*.log
+
+# Ignore OS files
+.DS_Store
+Thumbs.db
