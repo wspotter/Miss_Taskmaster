@@ -1,18 +1,37 @@
 // vscode_extension/src/extension.ts
 import * as vscode from 'vscode';
+import axios from 'axios';
 
-export function activate(context: vscode.ExtensionContext) {
+function activate(context: vscode.ExtensionContext) {
     console.log('Miss_TaskMaster extension is now active!');
 
+    // Import required components
+    import { ProjectPlanPanel } from './projectPlanPanel';
+    import { TaskStatusProvider } from './taskStatusProvider';
+
     // Register commands
-    let initProjectDisposable = vscode.commands.registerCommand('missTaskmaster.initProject', () => {
-        vscode.window.showInformationMessage('Initializing Miss_TaskMaster project...');
-        // TODO: Implement project initialization by calling MCP server
+    let initProjectDisposable = vscode.commands.registerCommand('missTaskmaster.initProject', async () => {
+        try {
+            vscode.window.showInformationMessage('Initializing Miss_TaskMaster project...');
+            const response = await axios.post('http://localhost:8000/project/init', {
+                plan_file: 'project_plan_template.json'
+            });
+            vscode.window.showInformationMessage(`Project initialized: ${response.data.message}`);
+        } catch (error) {
+            vscode.window.showErrorMessage(`Failed to initialize project: ${error.message}`);
+            console.error('Project initialization error:', error);
+        }
     });
 
-    let runOrchestrationDisposable = vscode.commands.registerCommand('missTaskmaster.runOrchestration', () => {
-        vscode.window.showInformationMessage('Running orchestration...');
-        // TODO: Call MCP server to run orchestration
+    let runOrchestrationDisposable = vscode.commands.registerCommand('missTaskmaster.runOrchestration', async () => {
+        try {
+            vscode.window.showInformationMessage('Running orchestration...');
+            const response = await axios.post('http://localhost:8000/orchestration/run');
+            vscode.window.showInformationMessage(`Orchestration started: ${response.data.message}`);
+        } catch (error) {
+            vscode.window.showErrorMessage(`Failed to run orchestration: ${error.message}`);
+            console.error('Orchestration error:', error);
+        }
     });
 
     let showProjectPlanDisposable = vscode.commands.registerCommand('missTaskmaster.showProjectPlan', () => {

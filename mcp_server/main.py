@@ -93,9 +93,9 @@ async def init_project(request: InitProjectRequest):
 async def get_project_status():
     """Get current project status including tasks and active work"""
     try:
-        status = gatekeeper.enforcer.get_status()
+        status = gatekeeper.task_enforcer.get_status()
         # Include project tasks for comprehensive status
-        status["project_tasks"] = gatekeeper.enforcer.project_tasks
+        status["project_tasks"] = gatekeeper.task_enforcer.project_tasks
         return ProjectStatusResponse(**status)
     except Exception as e:
         logger.error(f"Error getting project status: {e}", exc_info=True)
@@ -147,7 +147,7 @@ async def get_logs():
 async def get_task_list():
     """Get list of all project tasks"""
     try:
-        tasks = gatekeeper.enforcer.project_tasks
+        tasks = gatekeeper.task_enforcer.project_tasks
         return {"tasks": tasks, "total_count": len(tasks)}
     except Exception as e:
         logger.error(f"Error getting task list: {e}", exc_info=True)
@@ -156,7 +156,7 @@ async def get_task_list():
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run(
-        "main:app",
+        "mcp_server.main:app",
         host="0.0.0.0",
         port=8000,
         reload=True,

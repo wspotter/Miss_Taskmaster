@@ -23,6 +23,19 @@ class TaskEnforcer:
         self.current_task: Optional[Dict[str, Any]] = None
         self.logger = logging.getLogger(__name__)
 
+        # Load existing state if available
+        self._load_existing_state()
+
+    def _load_existing_state(self) -> None:
+        """
+        Loads existing state from the session manager.
+        """
+        state = self.session_manager.load_state()
+        self.project_tasks = state.get("project_tasks", [])
+        self.current_task = state.get("current_task", None)
+        if self.project_tasks:
+            self.logger.info(f"Loaded {len(self.project_tasks)} tasks from existing state.")
+
     def load_project_plan(self, plan: Dict[str, Any]) -> None:
         """
         Loads the project plan.

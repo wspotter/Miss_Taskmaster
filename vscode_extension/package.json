@@ -2,7 +2,13 @@
   "name": "miss-taskmaster",
   "displayName": "Miss TaskMaster",
   "description": "A multi-agent system for managing complex software development projects",
-  "version": "0.0.1",
+  "icon": "media/icon.png",
+  "galleryBanner": {
+    "color": "blue",
+    "theme": "dark"
+  },
+  "preview": true,
+  "version": "1.0.0"
   "publisher": "supermanus",
   "main": "./out/extension.js",
   "scripts": {
@@ -11,7 +17,7 @@
     "watch": "tsc -watch -p ./",
     "pretest": "npm run compile && npm run lint",
     "lint": "eslint src --ext ts",
-    "test": "node ./out/test/runTest.js",
+    "test": "vscode-test-electron ./out/test/runTest.js"
     "package": "vsce package"
   },
   "keywords": [
@@ -32,13 +38,14 @@
   },
   "homepage": "https://github.com/supermanus/miss-taskmaster#readme",
   "engines": {
-    "vscode": "^1.74.0"
+    "vscode": "^1.103.0"
   },
   "categories": [
     "Other"
   ],
   "activationEvents": [
-    "onCommand:missTaskmaster.initProject"
+    "onCommand:missTaskmaster.initProject",
+    "onStartupFinished"
   ],
   "contributes": {
     "commands": [

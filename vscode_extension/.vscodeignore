@@ -1,5 +1,5 @@
-# Ignore built output
-out/
+# Include built output for extension
+# out/
 
 # Ignore node modules
 node_modules/
